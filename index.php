@@ -288,113 +288,203 @@
   <!--</div>-->
 
   <div id="loginPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
-            <h2 class="text-2xl font-bold mb-4">Login to Share</h2>
-            <button class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
-                &times;
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+        <h2 class="text-xl font-bold">Login untuk Share</h2>
+        <small>*Otomatis terdaftar jika belum memiliki akun Promoter.</small>
+        <div class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
+            &times;
+        </div>
+        <form id="loginForm" class="space-y-4 mt-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nama*</label>
+            <input type="text" id="name" name="name" required class="bg-zinc-100 py-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2">
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700">Telp*</label>
+            <input type="tel" id="phone" name="phone" required class="bg-zinc-100 py-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email*</label>
+            <input type="email" id="emailShare" name="emailShare" required class="bg-zinc-100 py-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2">
+          </div>
+          <div>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 bg-green-600 text-white font-bold rounded shadow-lg hover:bg-green-700 focus:outline-none">
+              Login
             </button>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input type="tel" id="phone" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="emailShare" name="emailShare" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Login and Share
-                    </button>
-                </div>
-            </form>
+          </div>
+
+        </form>
+      </div>
+  </div>
+
+  <div id="sharePopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+        <h2 class="text-xl font-bold mb-6">Share Workshop</h2>
+        <div class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
+            &times;
+        </div>
+        <div class="flex justify-around mt-6">
+            <button class="flex flex-col items-center" data-via="facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                </svg>
+                <span class="mt-2">Facebook</span>
+            </button>
+            <button class="flex flex-col items-center" data-via="whatsapp">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                <span class="mt-2">WhatsApp</span>
+            </button>
+            <button class="flex flex-col items-center" data-via="x">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-black" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span class="mt-2">Twitter</span>
+            </button>
         </div>
     </div>
+  </div>
 
-    <div id="sharePopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
-            <h2 class="text-2xl font-bold mb-4">Share</h2>
-            <button id="closeButton" class="absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
-                &times;
-            </button>
-            <button>Facebook</button>
-            <button>Whatsapp</button>
-            <button>X</button>
-        </div>
-    </div>
+  <script>
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
+    function recordLinkHit(code) {
+        const formData = new URLSearchParams();
+        formData.append('code', code);
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-      let dropshipperId = 0;
-      
-        document.getElementById('share-btn').addEventListener('click', function(event) {
-            event.preventDefault();
-            if(dropshipperId == 0){
-              document.getElementById('loginPopup').classList.remove('hidden');
-              document.getElementById('loginPopup').classList.add('flex');
-            }else{
-              document.getElementById('sharePopup').classList.remove('hidden');
-              document.getElementById('sharePopup').classList.add('flex');
-            }
+        fetch('https://app.staging.resellr.id/api/link-hit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString(),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Link hit recorded:', data);
+        })
+        .catch(error => {
+            console.error('Error recording link hit:', error);
         });
+    }
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function() {
+        const code = getUrlParameter('code');
+        if (code) {
+            recordLinkHit(code);
+        }
+    });
+  </script>
+  
 
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('emailShare').value;
-            const store_id = 4;
+  <script>
+    let dropshipperId = 0;
 
-            const formData = new URLSearchParams();
-            formData.append('name', name);
-            formData.append('phone', phone);
-            formData.append('email', email);
-            formData.append('store_id', store_id);
+    document.getElementById('share-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        if(dropshipperId == 0){
+            document.getElementById('loginPopup').classList.remove('hidden');
+            document.getElementById('loginPopup').classList.add('flex');
+        } else {
+            document.getElementById('sharePopup').classList.remove('hidden');
+            document.getElementById('sharePopup').classList.add('flex');
+        }
+    });
 
-            fetch('https://app.staging.resellr.id/api/auth-reseller-global', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: formData.toString(),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('API Response:', data);
-                if (data.status === 200 && data.message === 'success') {
-                    dropshipperId = data.data.dropshipper.id;
-                    console.log('Dropshipper ID:', dropshipperId);
-                } else {
-                    throw new Error(`Login failed: ${data.message}`);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert(`Login failed. Please try again. Error: ${error.message}`);
-            })
-            .finally(() => {
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('emailShare').value;
+        const store_id = 4;
+
+        const formData = new URLSearchParams();
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('email', email);
+        formData.append('store_id', store_id);
+
+        fetch('https://app.staging.resellr.id/api/auth-reseller-global', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString(),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log('API Response:', data);
+            if (data.status === 200 && data.message === 'success') {
+                dropshipperId = data.data.dropshipper.id;
+                
                 document.getElementById('loginPopup').classList.add('hidden');
                 document.getElementById('loginPopup').classList.remove('flex');
-            });
+                
+                document.getElementById('sharePopup').classList.remove('hidden');
+                document.getElementById('sharePopup').classList.add('flex');
+            } else {
+                throw new Error(`Login failed: ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Login failed. Please try again. Error: ${error.message}`);
         });
+    });
 
-
-        // Close popup when clicking outside the form
-        document.getElementById('loginPopup').addEventListener('click', function(event) {
-            if (event.target === this || event.target.classList.contains('btn-close') ) {
+    // Close popup when clicking outside the form or on close button
+    document.querySelectorAll('#loginPopup, #sharePopup').forEach(popup => {
+        popup.addEventListener('click', function(event) {
+            if (event.target === this || event.target.classList.contains('close-btn')) {
                 this.classList.add('hidden');
                 this.classList.remove('flex');
             }
         });
+    });
 
-        
-    </script>
+    // Share buttons functionality
+    document.querySelectorAll('#sharePopup button').forEach(button => {
+        button.addEventListener('click', function() {
+            const via = this.getAttribute('data-via');
+            getShareLink(via);
+        });
+    });
+
+    function getShareLink(via) {
+        const formData = new URLSearchParams();
+        formData.append('campaign_id', '6');
+        formData.append('reseller_id', dropshipperId.toString());
+        formData.append('via', via);
+
+        fetch('https://app.staging.resellr.id/api/share-link', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString(),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 200 && data.message === 'success') {
+                const shareLink = data.data.share_link;
+                window.open(shareLink, '_blank');
+            } else {
+                throw new Error(`Failed to generate share link: ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Failed to generate share link. Please try again. Error: ${error.message}`);
+        });
+    }
+  </script>
 
   
   

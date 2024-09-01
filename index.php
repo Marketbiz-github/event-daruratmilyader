@@ -401,7 +401,7 @@
 
     document.getElementById('share-btn').addEventListener('click', function(event) {
         event.preventDefault();
-        if(dropshipperId == 0){
+        if(status == 0){
             document.getElementById('loginPopup').classList.remove('hidden');
             document.getElementById('loginPopup').classList.add('flex');
         } else {

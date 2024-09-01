@@ -290,7 +290,7 @@
   <div id="loginPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
     <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
         <h2 class="text-xl font-bold">Login untuk Share</h2>
-        <small>*Otomatis terdaftar jika belum memiliki akun Promoter.</small>
+        <small>*Otomatis terdaftar jika belum memiliki akun.</small>
         <div class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
             &times;
         </div>
@@ -346,6 +346,18 @@
     </div>
   </div>
 
+  <div id="activacyPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+        <h2 class="text-xl font-bold mb-6">Pemberitahuan</h2>
+        <div class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
+            &times;
+        </div>
+        <div class="flex justify-around mt-6">
+          Akun Anda berhasil dibuat, namun perlu diaktivasi. Tautan aktivasi telah dikirim ke email Anda. Silakan periksa email Anda dan ikuti instruksinya. Setelah diaktivasi, Anda dapat login kembali di halaman ini.
+        </div>
+    </div>
+  </div>
+
   <script>
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -385,6 +397,7 @@
 
   <script>
     let dropshipperId = 0;
+    let status = 0;
 
     document.getElementById('share-btn').addEventListener('click', function(event) {
         event.preventDefault();
@@ -423,12 +436,19 @@
             // console.log('API Response:', data);
             if (data.status === 200 && data.message === 'success') {
                 dropshipperId = data.data.dropshipper.id;
-                
+                status = data.data.dropshipper.status;
+
                 document.getElementById('loginPopup').classList.add('hidden');
                 document.getElementById('loginPopup').classList.remove('flex');
+
+                if(status == 1){
+                  document.getElementById('sharePopup').classList.remove('hidden');
+                  document.getElementById('sharePopup').classList.add('flex');
+                }else{
+                  document.getElementById('activacyPopup').classList.remove('hidden');
+                  document.getElementById('activacyPopup').classList.add('flex');
+                }
                 
-                document.getElementById('sharePopup').classList.remove('hidden');
-                document.getElementById('sharePopup').classList.add('flex');
             } else {
                 throw new Error(`Login failed: ${data.message}`);
             }
@@ -440,7 +460,7 @@
     });
 
     // Close popup when clicking outside the form or on close button
-    document.querySelectorAll('#loginPopup, #sharePopup').forEach(popup => {
+    document.querySelectorAll('#loginPopup, #sharePopup, #activacyPopup').forEach(popup => {
         popup.addEventListener('click', function(event) {
             if (event.target === this || event.target.classList.contains('close-btn')) {
                 this.classList.add('hidden');

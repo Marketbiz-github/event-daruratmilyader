@@ -1,5 +1,10 @@
 <?php
 // File konfigurasi
-$vaCon = '0000007861189600'; // Virtual Account dari iPaymu dashboard
-$apiKeyCon = 'SANDBOX87CC2DFA-FB00-42AB-9051-902CBA8E1E7E'; // API Key dari iPaymu dashboard
+$vaCon = '1179002126136640'; // Virtual Account dari iPaymu dashboard
+$apiKeyCon = 'D1f21xd4uYDzFXrw5HMpHKtRfUK0a.'; // API Key dari iPaymu dashboard
+
+
+$baseAPI = 'https://app.resellr.id/api';
+
+$scriptURL = 'https://script.google.com/macros/s/AKfycbxSQfC0of-oZV6l1fylmA0y_nF3Ue171qEVU6Ihbcuu_wnnatLQhDmDtUMId9XJ6SBCuQ/exec'; 
 ?>

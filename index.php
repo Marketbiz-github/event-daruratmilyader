@@ -1,6 +1,10 @@
 <?php
+  ob_start();
+  require 'config.php';
+
   $referenceId = (string) rand(10000, 99999); 
 
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +92,7 @@
         <p class="md:tracking-[2.2px] tracking-[1.2px] md:text-base text-sm">1.000.000 MILYADER ONLINE BARU</p>
 
         <div class="bg-[#4C536D] mt-8 mb-1 py-4 md:w-[600px] w-[470px]">
-          <h1 class="md:text-2xl text-xl md:px-0 px-[50px]  font-bold mb-1">Viral di Google & Strategi Konversi Maksimal dengan Audiens Tanpa Batas</h1>
+          <h1 class="md:text-2xl text-xl md:px-6 px-[50px]  font-bold mb-1">Viral di Google & Strategi Konversi Maksimal dengan Audiens Tanpa Batas</h1>
           <h4 class="text-gray-300 md:text-base text-sm md:px-0 px-[90px]">#DaruratMilyader dengan cara landscape digital marketing baru</h4>
         </div>
         
@@ -205,7 +209,7 @@
 
         <div class="flex md:space-x-4 space-x-3 mt-5">
           <!-- Join Workshop Button -->
-          <div class="flex flex-col items-center space-y-2  w-[190px]">
+          <div class="flex flex-col items-center space-y-2  ">
             <button id="reserve-btn" class="px-6 py-3 bg-green-600 text-white font-bold rounded shadow-lg hover:bg-green-700 focus:outline-none">
               JOIN WORKSHOP!
             </button>
@@ -213,7 +217,7 @@
           </div>
         
           <!-- Share Button with Icon and Tooltip -->
-          <div class="relative group w-[120px]">
+          <div class="relative group w-[130px]">
             <div class="flex flex-col items-center space-y-2">
               <button id="share-btn" class="flex items-center px-6 py-3 bg-red-600 text-white font-bold rounded shadow-lg hover:bg-red-600 focus:outline-none">
                 SHARE
@@ -221,7 +225,7 @@
                   <path d="M13.5 1a2.5 2.5 0 1 1-2.45 2.999l-6.407 3.2a2.502 2.502 0 0 1 0 1.602l6.407 3.2A2.5 2.5 0 1 1 14.5 15a2.5 2.5 0 0 1-2.45-3l-6.406-3.2a2.5 2.5 0 1 1 0-2.402l6.406-3.2A2.5 2.5 0 0 1 13.5 1z"/>
                 </svg>
               </button>
-              <small class="text-gray-300 text-left">*Reshare, Anda mendapat Rp 1.000,-</small>
+              <small class="text-gray-300 text-left">*Re-share, Anda mendapat Rp 1.000,-</small>
             </div>
         
             <!-- Tooltip -->
@@ -359,6 +363,8 @@
   </div>
 
   <script>
+    const baseAPI = '<?php echo $baseAPI; ?>';
+
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -370,7 +376,7 @@
         const formData = new URLSearchParams();
         formData.append('code', code);
 
-        fetch('https://app.staging.resellr.id/api/link-hit', {
+        fetch(`${baseAPI}/link-hit`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -416,7 +422,7 @@
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('emailShare').value;
-        const store_id = 4;
+        const store_id = 26931;
 
         const formData = new URLSearchParams();
         formData.append('name', name);
@@ -424,7 +430,7 @@
         formData.append('email', email);
         formData.append('store_id', store_id);
 
-        fetch('https://app.staging.resellr.id/api/auth-reseller-global', {
+        fetch(`${baseAPI}/auth-reseller-global`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -479,11 +485,11 @@
 
     function getShareLink(via) {
         const formData = new URLSearchParams();
-        formData.append('campaign_id', '6');
+        formData.append('campaign_id', '49');
         formData.append('reseller_id', dropshipperId.toString());
         formData.append('via', via);
 
-        fetch('https://app.staging.resellr.id/api/share-link', {
+        fetch(`${baseAPI}/share-link`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

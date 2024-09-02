@@ -1,4 +1,7 @@
 <?php
+ob_start();
+require 'config.php';
+
 if (isset($_POST['status']) && $_POST['status'] === 'berhasil') {
     // Mengambil data dari request POST
     $trx_id = $_POST['trx_id'];
@@ -7,6 +10,7 @@ if (isset($_POST['status']) && $_POST['status'] === 'berhasil') {
     $total = $_POST['total'];
     $fee = $_POST['fee'];
     $status_code = $_POST['status_code'];
+    $status = $_POST['status'];
     $va = $_POST['va'];
     $via = $_POST['via'];
     $channel = $_POST['channel'];
@@ -28,8 +32,10 @@ if (isset($_POST['status']) && $_POST['status'] === 'berhasil') {
         }
 
         if ($foundEntry) {
+            // Add status to the found entry
+            $foundEntry['status'] = 'berhasil';
+
             // Prepare data to send to Google Sheet
-            $scriptURL = 'https://script.google.com/macros/s/AKfycbzD1np0VwElKiQpNcgtWdBUhiIfA2M-Ica7AQOgiA8ly3pWIt-Bl443Lr1q6hMm3pjQGw/exec'; // Replace with your Apps Script URL
             $postData = http_build_query($foundEntry);
 
             // Send data to Google Sheets using cURL
@@ -57,4 +63,6 @@ if (isset($_POST['status']) && $_POST['status'] === 'berhasil') {
     // Status tidak berhasil
     echo "Status tidak berhasil.";
 }
+
+ob_end_flush();
 ?>

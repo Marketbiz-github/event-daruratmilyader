@@ -24,62 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tickets = isset($_POST['tickets']) ? htmlspecialchars($_POST['tickets']) : '';
     $referenceId = isset($_POST['referenceId']) ? htmlspecialchars($_POST['referenceId']) : '';
 
-    // Menambahkan data baru ke array
-    $dataArray[] = [
-        'fullname' => $fullname,
-        'business' => $business,
-        'whatsapp' => $whatsapp,
-        'email' => $email,
-        'tickets' => $tickets,
-        'referenceId' => $referenceId,
-        'timestamp' => date('Y-m-d H:i:s') // Menyimpan timestamp
-    ];
-
-    // Menyimpan data ke file JSON
-    file_put_contents($jsonFile, json_encode($dataArray, JSON_PRETTY_PRINT));
-
-    // Send data to Google Sheets using cURL
-    $scriptURL = 'https://script.google.com/macros/s/AKfycbzD1np0VwElKiQpNcgtWdBUhiIfA2M-Ica7AQOgiA8ly3pWIt-Bl443Lr1q6hMm3pjQGw/exec'; // Replace with your Apps Script URL
-
-    // Prepare the data to be sent
-    $postData = array(
-        'fullname' => $fullname,
-        'business' => $business,
-        'whatsapp' => $whatsapp,
-        'email' => $email,
-        'tickets' => $tickets,
-        'referenceId' => $referenceId
-    );
-
-    // Convert data to URL-encoded query string
-    $postData = http_build_query($postData);
-
-    // Initialize cURL
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $scriptURL);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-
-    if ($response === false) {
-        echo 'Error sending data to Google Sheets: ' . curl_error($ch);
-    } else {
-        echo 'Success! Data sent to Google Sheets.';
-    }
-
-    curl_close($ch);
-
     $va = $vaCon; 
     $apiKey = $apiKeyCon; 
-    $url = 'https://sandbox.ipaymu.com/api/v2/payment'; // Development mode URL
-// $url          = 'https://my.ipaymu.com/api/v2/payment';
+    //$url = 'https://sandbox.ipaymu.com/api/v2/payment'; // Development mode URL
+    $url = 'https://my.ipaymu.com/api/v2/payment';
     
     $method = 'POST'; 
     $product = 'Unlimited Reach Conversion Campaign & Viral SEO';
-    $thumbnail =null;
-    $price = 50000;
+    $thumbnail = 'https://daruratmilyader.com/img/banner.jpeg';
+    $price = 250000;
 
         // Request Body
         $body = [
@@ -87,23 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'buyerPhone' => $whatsapp,
             'buyerEmail' => $email,
             'product' => [$product],
-            'imageUrl' => $thumbnail,
+            'imageUrl' => [$thumbnail],
             'qty' => [$tickets],
             'price' => [intval(str_replace('.', '', $price))],
-            'notifyUrl' => 'http://localhost:81/yeye/form-event/',
-    'returnUrl' => null,
+            'notifyUrl' => 'https://daruratmilyader.com/notify.php',
+            'returnUrl' => null,
             'cancelUrl' => null,
-    'referenceId' => $referenceId,
+            'referenceId' => $referenceId,
         ];
         
         // Generate Signature
         // *Don't change this
-    $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
-    $requestBody  = strtolower(hash('sha256', $jsonBody));
-    $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
-    $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
-    $timestamp    = Date('YmdHis');
-    //End Generate Signature
+        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+        $requestBody  = strtolower(hash('sha256', $jsonBody));
+        $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
+        $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
+        $timestamp    = Date('YmdHis');
+        //End Generate Signature
 
         // Initialize cURL
         $ch = curl_init($url);
@@ -133,15 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $decode = json_decode($response, true);
 
-    if (isset($decode['Data']['Url'])) {
+        if (isset($decode['Data']['Url'])) {
             $urlPayment = $decode['Data']['Url'];
         } else {
             $urlPayment = '';
         }
 
     $nomor = '6287820837778'; // Nomor WhatsApp yang dituju
-    $pesan = urlencode("
-Halo! Terima kasih atas minat Anda untuk bergabung dalam Bootcamp Eksklusif \"*Unlimited Reach Conversion Campaign & Viral SEO*\".
+    $pesan = urlencode("Halo! Terima kasih atas minat Anda untuk bergabung dalam Bootcamp Eksklusif \"*Unlimited Reach Conversion Campaign & Viral SEO*\".
 
 Untuk menyelesaikan pendaftaran Anda, silakan lakukan pembayaran melalui tautan berikut:
 
@@ -159,10 +111,58 @@ Acara ini akan menghadirkan pembicara terbaik dalam bidang digital marketing:
 
 Jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih lanjut, hubungi kami melalui WhatsApp di 082221024582 (Saskia).
 
-Terima kasih, dan kami tunggu kehadiran Anda!
-" );
+Terima kasih, dan kami tunggu kehadiran Anda!" );
 
     $link = "https://wa.me/$nomor?text=$pesan";
+
+    // Menambahkan data baru ke array
+    $dataArray[] = [
+        'fullname' => $fullname,
+        'business' => $business,
+        'whatsapp' => $whatsapp,
+        'email' => $email,
+        'tickets' => $tickets,
+        'referenceId' => $referenceId,
+        'urlPayment' => $urlPayment,
+        'timestamp' => date('Y-m-d H:i:s') // Menyimpan timestamp
+    ];
+
+    // Menyimpan data ke file JSON
+    file_put_contents($jsonFile, json_encode($dataArray, JSON_PRETTY_PRINT));
+    
+
+    // Prepare the data to be sent
+    $postData = array(
+        'fullname' => $fullname,
+        'business' => $business,
+        'whatsapp' => $whatsapp,
+        'email' => $email,
+        'tickets' => $tickets,
+        'referenceId' => $referenceId,
+        'urlPayment' => $urlPayment,
+        'timestamp' => date('Y-m-d H:i:s')
+    );
+
+    // Convert data to URL-encoded query string
+    $postData = http_build_query($postData);
+
+    // Initialize cURL
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $scriptURL);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    if ($response === false) {
+        echo 'Error sending data to Google Sheets: ' . curl_error($ch);
+    } else {
+        echo 'Success! Data sent to Google Sheets.';
+    }
+
+    curl_close($ch);
+
 
     header('Location: ' . $link);
     exit;

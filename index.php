@@ -217,7 +217,7 @@
           </div>
         
           <!-- Share Button with Icon and Tooltip -->
-          <div class="relative group w-[130px]">
+          <div class="relative group w-[120px]">
             <div class="flex flex-col items-center space-y-2">
               <button id="share-btn" class="flex items-center px-6 py-3 bg-red-600 text-white font-bold rounded shadow-lg hover:bg-red-600 focus:outline-none">
                 SHARE
@@ -364,6 +364,7 @@
 
   <script>
     const baseAPI = '<?php echo $baseAPI; ?>';
+    let ownerID = '';
 
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -386,6 +387,7 @@
         .then(response => response.json())
         .then(data => {
             console.log('Link hit recorded:', data);
+            ownerID = data.data.id;
         })
         .catch(error => {
             console.error('Error recording link hit:', error);
@@ -488,6 +490,9 @@
         formData.append('campaign_id', '49');
         formData.append('reseller_id', dropshipperId.toString());
         formData.append('via', via);
+        formData.append('owner_id', ownerID);
+
+        console.log(ownerID);
 
         fetch(`${baseAPI}/share-link`, {
             method: 'POST',

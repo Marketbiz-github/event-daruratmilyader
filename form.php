@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $method = 'POST'; 
     $product = 'Unlimited Reach Conversion Campaign & Viral SEO';
     $thumbnail = 'https://daruratmilyader.com/img/banner.jpeg';
-    $price = 250000;
+    $price = 150000;
 
         // Request Body
         $body = [

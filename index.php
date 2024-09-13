@@ -196,12 +196,16 @@
         </div>
 
 
-        <div class="bg-[#4C536D] text-white p-6 rounded-lg shadow-lg my-2 md:w-[480px] w-[320px] flex justify-center md:mt-2 mt-[-5px]">
+        <div class="relative bg-[#4C536D] text-white p-6 py-8 rounded-lg shadow-lg my-2 md:w-[480px] w-[320px] flex justify-center md:mt-2 mt-[-5px]">
+          <!-- FLASHSALE Banner -->
+          <div class="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold py-1 px-2 rounded-br-lg">
+            FLASHSALE 13 - 14 September 2024
+          </div>
           <div class="flex items-center space-x-4 text-center">
             <span class="font-bold md:text-4xl text-2xl">HTM</span>
             <div class="flex flex-col items-center border-l-4 border-gray-300 pl-3">
               <span class="text-xs font-medium line-through">Rp. 400.000</span>
-              <span class="md:text-2xl text-xl font-bold">Rp. 250.000</span>
+              <span class="md:text-2xl text-xl font-bold">Rp. 150.000</span>
             </div>
           </div>
         </div>
@@ -294,7 +298,10 @@
   <div id="loginPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
     <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
         <h2 class="text-xl font-bold">Login untuk Share</h2>
-        <small>*Otomatis terdaftar jika belum memiliki akun.</small>
+        <p class="leading-5 text-sm mt-3 mb-2">Anda akan mendapatkan Rp.500 setiap share & setiap ada reshare Anda akan mendapat tambahan Rp.1000</p> 
+        <p class="leading-5 text-sm">Uang langsung masuk ke rekening!</p>
+        <p class="leading-5 text-xs">*untuk hasil maksimal, buat caption menarik untuk terjadi Re-Share!</p>
+        
         <div class="close-btn absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900">
             &times;
         </div>
